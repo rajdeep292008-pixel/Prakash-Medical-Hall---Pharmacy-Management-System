@@ -4,38 +4,32 @@ This is a prototype made with the help of A.I. tools to help people get proper p
 
 # 💊 Prakash Medical Hall - Pharmacy Management System
 
-A high-performance, AI-assisted pharmacy inventory and customer management interface. This application is designed to streamline medical billing, stock tracking, and customer records with a clean, modern, and user-centric design.
+A robust, web-native pharmacy inventory and customer management interface. This application focuses on delivering a streamlined user experience for medical billing, stock monitoring, and customer data tracking.
 
 ---
 
 ## 🚀 Key Features
-* **Inventory Management:** Real-time tracking of medicine stock, expiry dates, and supplier details.
-* **Customer Interface:** Simplified billing system for quick checkout and record keeping.
-* **Responsive UI:** Built with modern CSS/Tailwind standards to ensure functionality across all device sizes.
-* **AI-Optimized Logic:** Core functional modules developed through collaborative AI iteration for clean, modular, and maintainable code.
+* **Inventory Dashboard:** Real-time visualization of medicine stock and availability.
+* **Customer-Centric UI:** A clean, responsive interface built with semantic HTML5 for maximum accessibility and performance.
+* **Efficient Billing:** Simplified checkout and record-keeping logic.
+* **AI-Assisted Development:** Rapidly prototyped and optimized using advanced coding assistants to ensure clean, logical structure.
 
 ## 🛠️ Tech Stack
-* **Frontend:** HTML5, CSS3, JavaScript (ES6+), TypeScript
-* **Styling:** TailwindCSS
-* **Development Workflow:** AI-Assisted Architecture & Rapid Prototyping
-* **Version Control:** Git & GitHub
+* **Markup & Structure:** HTML5
+* **Styling & Layout:** TailwindCSS / CSS3
+* **Logic Engine:** JavaScript & TypeScript
+* **Development Workflow:** AI-Assisted Architecture
 
 ---
 
-## 📋 Project Architecture
-The project is structured for scalability, separating concerns into specific modules:
-- `/assets`: UI assets, icons, and branding.
-- `/src`: Core logic, including TypeScript-defined interfaces for medical data.
-- `/components`: Reusable UI modules for billing and stock management.
-
-## 📈 Performance & Insights
-> *Built with strict type-safety via TypeScript to ensure zero-error calculation for sensitive pharmaceutical billing operations.*
+## 🏗️ Technical Foundation
+This application is built as a **web-native prototype**, prioritizing high-performance DOM interaction and responsive design. By leveraging a strict TypeScript logic layer alongside clean HTML structure, the application ensures accurate data handling for pharmaceutical operations.
 
 ---
 
 ## 👨‍💻 Developed By
 **Prakash** | *AI-Collaborative Developer & Frontend Prototype Engineer*
-*Passionate about building functional digital solutions that bridge the gap between complex data and user-friendly experience.*
+*Dedicated to building functional, user-friendly digital tools that solve real-world operational challenges.*
 
 ---
 *Disclaimer: This is a prototype application designed for educational and portfolio demonstration purposes.*
