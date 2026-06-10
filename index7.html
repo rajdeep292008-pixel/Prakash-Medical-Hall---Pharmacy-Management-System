@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prakash Pharmacy - Live LLM AI Clinical Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 font-sans text-gray-800 antialiased scroll-smooth pb-24">
+
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
+    <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+      <a href="#" class="flex items-center space-x-2">
+        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md shadow-green-200">+</div>
+        <span class="text-2xl font-bold tracking-tight text-gray-900">Prakash <span class="text-green-600">Pharmacy</span></span>
+      </a>
+      
+      <div class="hidden lg:flex space-x-6 font-semibold text-gray-600 text-sm">
+        <a href="#home" class="hover:text-green-600 transition-colors">Home</a>
+        <a href="#search-section" class="hover:text-green-600 transition-colors">Medicine Lookup</a>
+        <a href="#cart-section" class="hover:text-green-600 transition-colors">Order Queue</a>
+        <a href="#first-aid" class="hover:text-green-600 transition-colors">First Aid Matrix</a>
+        <a href="#health-tools" class="hover:text-green-600 transition-colors">Health Calculator</a>
+        <a href="#tracker" class="hover:text-green-600 transition-colors">Track Shipment</a>
+      </div>
+
+      <a href="#upload" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-full font-medium text-sm transition-all shadow-md">
+        Upload Prescription
+      </a>
+    </nav>
+  </header>
+
+  <section id="home" class="relative bg-gradient-to-b from-green-50/50 to-white py-12 text-center">
+    <div class="container mx-auto px-6 flex flex-col items-center">
+      <span class="bg-green-100 text-green-700 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full mb-4">Enterprise System Sandbox Blueprint</span>
+      <h1 class="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4 max-w-4xl">
+        Autonomous Pharmacy Intelligence <br/> <span class="text-green-600">With Real-Time Clinical Matrix</span>
+      </h1>
+      <p class="text-base text-gray-600 mb-6 max-w-2xl">
+        Consult our comprehensive database, look up medication formulations, check immediate interactive first aid triage sequences, or process metrics using our local sandbox array.
+      </p>
+    </div>
+  </section>
+
+  <section id="search-section" class="py-4 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+        <h3 class="text-xl font-bold mb-1 text-gray-900">Clinical Formulation Lookup Index</h3>
+        <p class="text-xs text-gray-500 mb-4">Type a condition to instantly fetch core drug components, medical classifications, and Indian Rupee estimated market values.</p>
+        
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+          <input type="text" id="dbSearchInput" placeholder="Try typing: Fever, Diabetes, Cough, Hypertension, Asthma, Infection, Acid Reflux..." class="flex-1 px-5 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 outline-none text-base font-medium">
+          <button onclick="lookupMedicine()" class="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md">Search Store</button>
+        </div>
+
+        <div id="searchResultPanel" class="hidden border border-green-100 bg-green-50/30 rounded-xl p-5">
+          <h4 class="font-bold text-gray-900 text-lg mb-2" id="resCondition">Matches Found</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr class="border-b border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
+                  <th class="py-2">Formulation / Drug Component</th>
+                  <th class="py-2">Medical Classification</th>
+                  <th class="py-2">Est Price</th>
+                  <th class="py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody id="resTableBody" class="text-gray-700 font-medium"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cart-section" class="py-6 bg-slate-50">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-md">
+        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          🛒 Active Patient Order Manifest
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm mb-4">
+            <thead>
+              <tr class="border-b border-gray-200 text-gray-400 text-xs">
+                <th class="pb-2">Item Specifications</th>
+                <th class="pb-2 text-right">Unit Price</th>
+                <th class="pb-2 text-center">Remove</th>
+              </tr>
+            </thead>
+            <tbody id="cartItemsBody">
+              <tr>
+                <td colspan="3" class="text-center py-6 text-gray-400 text-xs italic">Your current order log manifest is completely empty.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pt-4 border-t border-gray-100 flex justify-between items-center font-bold text-gray-900">
+          <span>Estimated Billing Amount:</span>
+          <span id="cartTotalDisplay" class="text-green-600 text-xl font-black">₹0.00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-6 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-gray-900 rounded-3xl shadow-2xl border border-gray-800 overflow-hidden">
+        <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-4 border-b border-gray-700 flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <span class="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></span>
+            <div>
+              <h4 class="font-black text-white text-sm tracking-wide">Prakash AI Clinical Assistant</h4>
+              <p class="text-[10px] text-gray-400 font-medium">System Environment: Prototype Interface</p>
+            </div>
+          </div>
+          <span class="text-[10px] bg-amber-950/50 text-amber-400 font-bold px-2 py-0.5 rounded border border-amber-800">Preview Mode</span>
+        </div>
+        
+        <div class="p-6 h-80 overflow-y-auto space-y-4 bg-slate-950/40 text-xs" id="mainChatDisplay">
+          <div class="bg-gray-800 text-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed shadow-sm">
+            Hello! I am the Prakash Pharmacy AI Assistant shell framework. Feel free to interact with my diagnostic user field below to review system prompt rendering.
+          </div>
+        </div>
+
+        <div class="p-3 bg-gray-900/80 border-t border-gray-800 flex gap-2">
+          <input type="text" id="mainChatInput" placeholder="Type a medical question to verify chat interface execution..." class="flex-1 bg-gray-950 text-white border border-gray-700 rounded-xl px-4 py-3 text-xs outline-none focus:border-green-500 font-medium" onkeypress="if(event.key === 'Enter') processLiveAiDialogue()">
+          <button onclick="processLiveAiDialogue()" id="aiSubmitBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-md">Ask Live AI</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="first-aid" class="py-8 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-red-50/60 rounded-3xl p-6 border border-red-100 shadow-md">
+        <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-red-200 pb-4 mb-6 gap-2">
+          <div>
+            <h3 class="text-2xl font-black text-red-900 flex items-center gap-2">
+              🚨 Emergency First Aid Medical Matrix
+            </h3>
+            <p class="text-xs text-red-700 font-medium">Instant responsive clinical stabilization protocols. Expand any node to access explicit medical workflows.</p>
+          </div>
+          <span class="text-xs font-bold bg-red-600 text-white px-3 py-1 rounded-full text-center">Standard Protocol v3.0</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button onclick="filterFirstAid('all')" id="tab-all" class="fa-tab px-4 py-2 text-xs font-bold rounded-xl transition-all bg-red-600 text-white shadow-sm">All Protocols</button>
+          <button onclick="filterFirstAid('trauma')" id="tab-trauma" class="fa-tab px-4 py-2 text-xs font-bold rounded-xl transition-all bg-white text-red-900 border border-red-200 hover:bg-red-100">Trauma & Bleeding</button>
+          <button onclick="filterFirstAid('cardiac')" id="tab-cardiac" class="fa-tab px-4 py-2 text-xs font-bold rounded-xl transition-all bg-white text-red-900 border border-red-200 hover:bg-red-100">Cardiac & Airway</button>
+          <button onclick="filterFirstAid('bites')" id="tab-bites" class="fa-tab px-4 py-2 text-xs font-bold rounded-xl transition-all bg-white text-red-900 border border-red-200 hover:bg-red-100">Poisons & Environmental</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-3" id="firstAidGrid">
+          
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="trauma">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Severe Burns Management</span>
+              <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono font-bold">TRAUMA</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Cool Immediately:</strong> Place affected area under clean, cool running tap water for at least 10–20 minutes. Do not use ice or ice-water.</p>
+              <p><strong>2. Protect Membrane:</strong> Remove rings, jewelry, or restrictive clothing carefully before structural swelling sets in. Do not pop fluid blisters.</p>
+              <p><strong>3. Loose Dressing:</strong> Cover loosely with a clean, sterile, non-stick gauze wrap or clear plastic kitchen cling film. Never apply butter or greasy ointments.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="trauma">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Arterial Hemorrhage Control</span>
+              <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono font-bold">TRAUMA</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Direct Continuous Force:</strong> Apply heavy, firm, uninterrupted manual pressure directly onto the wound using sterile gauze pads or a clean cloth clothing barrier.</p>
+              <p><strong>2. Elevate Limb:</strong> Maintain structural pressure while lifting the bleeding limb above heart level to limit vascular pressure vectors.</p>
+              <p><strong>3. Tourniquet Deployment:</strong> If severe limb bleeding threatens life and direct pressure fails, apply a tactical tourniquet 2-3 inches above the wound area.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="trauma">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Fractures & Dislocations</span>
+              <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono font-bold">TRAUMA</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Absolute Immobilization:</strong> Keep the affected bone structure completely still. Do not attempt to force, snap, or reset structural joints back into position.</p>
+              <p><strong>2. Structural Splinting:</strong> Apply a rigid external object (boards, rolled newspapers) above and below the fracture node to restrict joint torque.</p>
+              <p><strong>3. Cold Therapy:</strong> Apply enclosed ice packs wrapped inside a cloth layer to minimize subdermal swelling. Do not apply ice directly to skin.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="cardiac">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Cardiopulmonary CPR Framework</span>
+              <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-mono font-bold">CARDIAC</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Ground Placement:</strong> Position the patient flat on their back over a firm, unyielding surface. Position yourself directly adjacent to their chest line.</p>
+              <p><strong>2. Continuous Compressions:</strong> Interlock fingers, place the heel of your primary hand on the center lower sternum bone, and compress down 2 to 2.4 inches.</p>
+              <p><strong>3. Target Rate:</strong> Execute compressions at a steady speed of 100 to 120 beats per minute. Allow full chest recoil between actions.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="cardiac">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Choking Emergency (Heimlich)</span>
+              <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-mono font-bold">AIRWAY</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Verify Choking Vector:</strong> Confirm if the individual can speak, gasp, or forcefully cough. If silent, immediate intervention is mandatory.</p>
+              <p><strong>2. Hand Fist Placement:</strong> Move behind the victim, wrap your arms around their waistline, and place a thumb-side closed fist slightly above the navel indicator.</p>
+              <p><strong>3. Inward Upward Thrusts:</strong> Grasp your fist firmly with your opposite hand and deliver rapid, powerful, inward-and-upward structural thrusts until clear.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="cardiac">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Stroke Protocol (F.A.S.T.)</span>
+              <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-mono font-bold">CARDIAC</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>F - Facial Asymmetry:</strong> Ask the person to smile. Monitor if one side of their lips drifts downward or feels completely numb.</p>
+              <p><strong>A - Arm Drift Weakness:</strong> Instruct them to extend both arms horizontally forward. Check if one arm tracking shifts down involuntarily.</p>
+              <p><strong>S - Speech Impediment:</strong> Ask them to repeat a simple sentence structure. Listen for distorted, slurred, or incoherent syllables.</p>
+              <p><strong>T - Time Metric Emergency:</strong> If any symptoms align, record the exact onset timestamp and call emergency response immediately.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="bites">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Venomous Snake Bite Stasis</span>
+              <span class="text-[10px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-mono font-bold">ENVIR</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Total Physical Stasis:</strong> Keep the patient absolutely calm and stationary. Physical exertion speeds up systemic venom distribution.</p>
+              <p><strong>2. Neutral Limb Tracking:</strong> Clean the bite area gently, remove restrictive clothing bands, and maintain the affected limb below or level with the heart line.</p>
+              <p><strong>3. Prohibited Actions:</strong> Do not cut across the fang incisions, do not apply a suction device, and do not place ice over the tissue.</p>
+            </div>
+          </details>
+
+          <details class="bg-white p-3.5 rounded-xl border border-red-200 cursor-pointer text-sm transition-all fa-card" data-category="bites">
+            <summary class="font-bold text-gray-800 hover:text-red-700 flex justify-between items-center">
+              <span>Chemical Toxin & Poison Ingestion</span>
+              <span class="text-[10px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-mono font-bold">ENVIR</span>
+            </summary>
+            <div class="text-xs text-gray-600 mt-2 pl-3 border-l-2 border-red-500 leading-relaxed space-y-1">
+              <p><strong>1. Identify Substance Node:</strong> Isolate the container or compound if safe to inspect. Do not induce vomiting unless directly instructed by medical control.</p>
+              <p><strong>2. Corrosive Management:</strong> For external chemical contacts, immediately flush skin tissue surfaces with clear running water for 15-20 minutes.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="health-tools" class="py-6 bg-slate-50">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h4 class="font-black text-xl text-gray-900 mb-1">BMI Diagnostic Calculator</h4>
+          <p class="text-xs text-gray-500">Computes physiological weight-to-height balance dynamics safely.</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+          <div class="flex gap-2 mb-3">
+            <input type="number" id="bmiWeight" placeholder="Weight (kg)" class="w-1/2 p-2.5 bg-white border border-gray-300 rounded-lg text-sm outline-none">
+            <input type="number" id="bmiHeight" placeholder="Height (cm)" class="w-1/2 p-2.5 bg-white border border-gray-300 rounded-lg text-sm outline-none">
+          </div>
+          <button onclick="calculateBMI()" class="w-full bg-gray-900 text-white font-bold py-2 rounded-lg text-xs hover:bg-black">Calculate Metrics</button>
+          <div id="bmiResultBox" class="mt-3 text-center hidden p-2 bg-green-100 text-green-800 font-bold rounded-lg text-xs"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracker" class="py-6 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="bg-slate-50 rounded-2xl p-6 border border-gray-200 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+          <div>
+            <h3 class="text-xl font-bold text-gray-900">Real-Time Package Status Tracker</h3>
+            <p class="text-xs text-gray-500">Track delivery logistics logs.</p>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="trackInput" value="PR-2026" class="border border-gray-300 rounded-lg px-3 py-1.5 font-bold uppercase tracking-wider text-center w-32 outline-none text-sm bg-white">
+            <button onclick="trackOrder()" class="bg-gray-900 hover:bg-black text-white font-bold text-xs px-4 py-2 rounded-lg">Track Node</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 relative mt-6 pt-2">
+          <div class="text-center"><div id="step1" class="w-6 h-6 rounded-full bg-green-600 text-white font-bold flex items-center justify-center mx-auto mb-1 text-xs relative z-10">1</div><p class="text-[10px] font-bold text-gray-800">Rx Verified</p></div>
+          <div class="text-center"><div id="step2" class="w-6 h-6 rounded-full bg-green-600 text-white font-bold flex items-center justify-center mx-auto mb-1 text-xs relative z-10">2</div><p class="text-[10px] font-bold text-gray-800">Dispensing</p></div>
+          <div class="text-center"><div id="step3" class="w-6 h-6 rounded-full bg-gray-200 text-gray-600 font-bold flex items-center justify-center mx-auto mb-1 text-xs relative z-10">3</div><p class="text-[10px] font-medium text-gray-400">En Route</p></div>
+          <div class="absolute top-5 left-[16%] right-[16%] h-0.5 bg-gray-200 -z-0"><div id="trackProgressBar" class="h-full bg-green-600 w-1/2 transition-all duration-500"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="upload" class="py-6 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl text-center">
+      <form class="p-6 bg-gradient-to-r from-gray-900 to-slate-800 text-white rounded-2xl shadow-md">
+        <h4 class="text-lg font-bold text-green-400 mb-1">Secure Rx Verification Handshake Form</h4>
+        <input type="file" class="text-xs bg-gray-800 p-2 rounded-lg border border-gray-700 max-w-xs mx-auto block mb-2" required>
+        <button type="submit" onclick="event.preventDefault(); alert('Prescription uploaded successfully.');" class="bg-green-600 text-white font-bold text-xs px-6 py-2 rounded-lg">Transmit Form Data</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="py-8 bg-gray-900 text-white text-xs border-t border-gray-800 text-center">
+    <p>© 2026 Prakash Pharmacy - Egmore, Chennai. Direct WhatsApp Service Active.</p>
+  </footer>
+
+  <script>
+    // FULLY EXPANDED PHARMACEUTICAL AND FORMULATION LOOKUP LOG LOGIC
+    const medicalDatabase = {
+      "fever": [
+        { name: "Paracetamol (Crocin 650)", type: "Antipyretic / NSAID", cost: 32.00 },
+        { name: "Dolo 650mg Tableted Node", type: "Analgesic core formulation", cost: 28.50 },
+        { name: "Ibuprofen (Brufen 400)", type: "Non-Steroidal Anti-Inflammatory", cost: 24.15 }
+      ],
+      "diabetes": [
+        { name: "Metformin (Glycomet 500)", type: "Biguanide Oral Antidiabetic", cost: 145.00 },
+        { name: "Glimepiride (Amaryl 1mg)", type: "Second-Gen Sulfonylurea Agent", cost: 95.00 },
+        { name: "Sitagliptin (Januvia 50mg)", type: "DPP-4 Enzyme Inhibitor Matrix", cost: 320.00 }
+      ],
+      "cough": [
+        { name: "Benadryl Cough Syrup Complex", type: "Antitussive / Antihistamine Blend", cost: 115.00 },
+        { name: "Ascoril LS Expectoration Agent", type: "Mucolytic Bronchodilator Fluid", cost: 124.00 },
+        { name: "Corex DX Cough Syrup", type: "Centrally Acting Suppressant Combo", cost: 105.00 }
+      ],
+      "hypertension": [
+        { name: "Amlodipine (Amlong 5mg)", type: "Calcium Channel Vascular Blocker", cost: 64.00 },
+        { name: "Telmisartan (Telma 40)", type: "Angiotensin II Receptor Blocker", cost: 180.00 },
+        { name: "Atenolol (Betacard 50)", type: "Selective Beta-1 Adrenergic Antagonist", cost: 42.00 }
+      ],
+      "asthma": [
+        { name: "Levosalbutamol (Asthalin Inhaler)", type: "Beta-2 Adrenergic Bronchodilator", cost: 154.00 },
+        { name: "Montelukast Sodium (Singulair 10mg)", type: "Leukotriene Receptor Antagonist", cost: 210.00 }
+      ],
+      "infection": [
+        { name: "Amoxicillin (Novamox 500)", type: "Beta-Lactam Antibiotic Element", cost: 118.00 },
+        { name: "Azithromycin (Azithral 500)", type: "Macrolide Antibacterial Substrate", cost: 132.50 }
+      ],
+      "acid reflux": [
+        { name: "Pantoprazole (Pan-40 Matrix)", type: "Proton Pump Inhibitor (PPI)", cost: 165.00 },
+        { name: "Ranitidine (Rantac 150mg)", type: "Histamine H2-Receptor Antagonist", cost: 34.00 }
+      ]
+    };
+
+    let checkoutManifest = [];
+
+    function lookupMedicine() {
+      const input = document.getElementById('dbSearchInput').value.toLowerCase().trim();
+      const panel = document.getElementById('searchResultPanel');
+      const body = document.getElementById('resTableBody');
+      const label = document.getElementById('resCondition');
+
+      if (!input) return;
+      let targetKey = Object.keys(medicalDatabase).find(k => input.includes(k) || k.includes(input));
+
+      if (targetKey) {
+        label.innerText = "Matches Mapped for: " + targetKey.toUpperCase();
+        body.innerHTML = "";
+        medicalDatabase[targetKey].forEach((med, idx) => {
+          body.innerHTML += `
+            <tr class="border-b border-gray-100">
+              <td class="py-3 font-bold text-green-700 text-xs">${med.name}</td>
+              <td class="py-3 text-gray-500 text-xs">${med.type}</td>
+              <td class="py-3 text-gray-900 text-xs font-bold">₹${med.cost.toFixed(2)}</td>
+              <td class="py-3"><button onclick="injectToOrderQueue('${targetKey}', ${idx})" class="bg-green-600 text-white text-[10px] px-2 py-1 rounded font-bold hover:bg-green-700">Add to Queue</button></td>
+            </tr>`;
+        });
+        panel.classList.remove('hidden');
+      } else {
+        alert("Keyword not indexed. For demo, try: Fever, Cough, Diabetes, Hypertension, Asthma, Infection, or Acid Reflux.");
+      }
+    }
+
+    function injectToOrderQueue(key, index) {
+      checkoutManifest.push(medicalDatabase[key][index]);
+      refreshManifestView();
+    }
+
+    function removeQueueNode(index) {
+      checkoutManifest.splice(index, 1);
+      refreshManifestView();
+    }
+
+    function refreshManifestView() {
+      const container = document.getElementById('cartItemsBody');
+      const billingDisplay = document.getElementById('cartTotalDisplay');
+      if (checkoutManifest.length === 0) {
+        container.innerHTML = `<tr><td colspan="3" class="text-center py-6 text-gray-400 text-xs italic">Your current order log manifest is completely empty.</td></tr>`;
+        billingDisplay.innerText = "₹0.00";
+        return;
+      }
+      container.innerHTML = "";
+      let accumulatedTotal = 0;
+      checkoutManifest.forEach((element, pos) => {
+        accumulatedTotal += element.cost;
+        container.innerHTML += `<tr class="border-b border-gray-100 text-xs text-gray-700"><td class="py-2.5">${element.name}</td><td class="py-2.5 text-right font-bold">₹${element.cost.toFixed(2)}</td><td class="py-2.5 text-center"><button onclick="removeQueueNode(${pos})" class="text-red-500 font-bold">✕</button></td></tr>`;
+      });
+      billingDisplay.innerText = "₹" + accumulatedTotal.toFixed(2);
+    }
+
+    function filterFirstAid(category) {
+      document.querySelectorAll('.fa-tab').forEach(btn => {
+        btn.classList.remove('bg-red-600', 'text-white', 'shadow-sm');
+        btn.classList.add('bg-white', 'text-red-900', 'border', 'border-red-200');
+      });
+      const activeTab = document.getElementById('tab-' + category);
+      activeTab.classList.remove('bg-white', 'text-red-900', 'border', 'border-red-200');
+      activeTab.classList.add('bg-red-600', 'text-white', 'shadow-sm');
+
+      document.querySelectorAll('.fa-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    function calculateBMI() {
+      const mass = parseFloat(document.getElementById('bmiWeight').value);
+      const tallness = parseFloat(document.getElementById('bmiHeight').value) / 100;
+      const box = document.getElementById('bmiResultBox');
+      if (mass && tallness) {
+        const score = (mass / (tallness * tallness)).toFixed(1);
+        box.innerText = `Computed BMI Score: ${score}`;
+        box.classList.remove('hidden');
+      }
+    }
+
+    function trackOrder() {
+      const entry = document.getElementById('trackInput').value.trim().toUpperCase();
+      const targetStep = document.getElementById('step3');
+      const fillerBar = document.getElementById('trackProgressBar');
+      if (entry === "PR-2026") {
+        targetStep.classList.add('bg-green-600', 'text-white');
+        targetStep.classList.remove('bg-gray-200', 'text-gray-600');
+        fillerBar.style.width = "100%";
+      }
+    }
+
+    // INTERACTIVE PROTOTYPE ENVIRONMENT SYSTEM DIALOGUE PROCESSOR
+    async function processLiveAiDialogue() {
+      const display = document.getElementById('mainChatDisplay');
+      const input = document.getElementById('mainChatInput');
+      const btn = document.getElementById('aiSubmitBtn');
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      // Append user input directly to screen display
+      display.innerHTML += `<div class="bg-green-600 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] ml-auto text-right font-bold shadow-md">${text}</div>`;
+      input.value = "";
+      display.scrollTop = display.scrollHeight;
+
+      // Create loading visual delay component
+      const loadingId = "load-" + Date.now();
+      display.innerHTML += `<div id="${loadingId}" class="bg-gray-800 text-gray-400 p-3 rounded-2xl rounded-tl-none max-w-[85%] italic">AI is connecting to cloud diagnostic stream...</div>`;
+      display.scrollTop = display.scrollHeight;
+      
+      btn.disabled = true;
+      btn.innerText = "Processing...";
+
+      // Trigger standard prototype simulation delay loop
+      setTimeout(() => {
+        document.getElementById(loadingId).remove();
+
+        // Print custom notification explaining future feature integration roadmap
+        display.innerHTML += `
+          <div class="bg-amber-900/40 text-amber-200 p-3 rounded-2xl rounded-tl-none max-w-[85%] border border-amber-800 leading-relaxed shadow-md">
+            <strong>System Notification:</strong><br/>
+            The Live Chatbot connectivity network is locked for this prototype build. This feature and its dynamic LLM model integration endpoints will be fully accessible in a future release.
+          </div>`;
+
+        btn.disabled = false;
+        btn.innerText = "Ask Live AI";
+        display.scrollTop = display.scrollHeight;
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
