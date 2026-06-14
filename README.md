@@ -33,3 +33,7 @@ This application is built as a **web-native prototype**, prioritizing high-perfo
 
 ---
 *Disclaimer: This is a prototype application designed for educational and portfolio demonstration purposes.*
+
+---
+
+Made with 💚 with the help of AI.
