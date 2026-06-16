@@ -2,7 +2,7 @@
 
 This is a prototype made with the help of A.I. tools to help people get proper pharmacy management system.
 
-[TO VISIT CLICK HERE](https://rajdeep292008-pixel.github.io/Prakash-Medical-Hall---Pharmacy-Management-System/)
+👉 [TO VISIT CLICK HERE](https://rajdeep292008-pixel.github.io/Prakash-Medical-Hall---Pharmacy-Management-System/)
 
 ---
 
